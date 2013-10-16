@@ -43,7 +43,7 @@
 
 /* jude nagurney: GeoIP change, for providing proxy authorization */
 /* #include <config.h> */
-#define restrict __restrict
+// #define restrict __restrict
 
 /* Get prototype. */
 #include "base64.h"

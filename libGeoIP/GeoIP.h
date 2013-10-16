@@ -33,15 +33,18 @@ extern "C" {
 #else /* !defined(_WIN32) */ 
 #include <winsock2.h> 
 #include <ws2tcpip.h> 
+#define HAVE_STDINT_H 1
 #define snprintf _snprintf 
 #define FILETIME_TO_USEC(ft) (((unsigned __int64) ft.dwHighDateTime << 32 | ft.dwLowDateTime) / 10) 
+#define ssize_t size_t
+#define PACKAGE_VERSION "1.5.1"
 #endif /* !defined(_WIN32) */ 
  
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include <sys/types.h> /* for fstat */
-#include <sys/stat.h>	/* for fstat */
+//#include <sys/types.h> /* for fstat */
+//#include <sys/stat.h>	/* for fstat */
 
 #define SEGMENT_RECORD_LENGTH 3
 #define LARGE_SEGMENT_RECORD_LENGTH 4
@@ -177,7 +180,7 @@ extern const char GeoIP_country_continent[255][3];
 #ifdef DLL
 #define GEOIP_API __declspec(dllexport)
 #else
-#define GEOIP_API
+#define GEOIP_API __declspec(dllimport)
 #endif  /* DLL */
 
 GEOIP_API void GeoIP_setup_custom_directory(char *dir);
@@ -361,9 +364,6 @@ GEOIP_API char *GeoIP_org_by_name_v6 (GeoIP* gi, const char *name);
 
 /* End deprecated */
 
-
-
-#
 #ifdef __cplusplus
 }
 #endif

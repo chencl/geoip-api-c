@@ -1,5 +1,4 @@
-#include <string.h>
-#include <stdio.h>
+#include "GeoIP.h"
 
 const char * GeoIP_region_name_by_code(const char * country_code,const char * region_code) {
   const char * name = NULL;

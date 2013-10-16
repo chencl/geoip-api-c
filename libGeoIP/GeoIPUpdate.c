@@ -40,7 +40,7 @@
 #include <zlib.h>
 #include <time.h>
 #include <stdio.h>
-#include <unistd.h>
+// #include <unistd.h>
 
 #ifdef _UNUSED
 #elif defined(__GNUC__)

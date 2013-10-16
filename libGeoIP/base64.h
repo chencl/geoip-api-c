@@ -21,13 +21,20 @@
 
 /* jude nagurney: GeoIP change, for providing proxy authorization */
 /* #include <config.h> */
-#define restrict __restrict
-
+#include <stdlib.h>
 /* Get size_t. */
-# include <stddef.h>
+#include <stddef.h>
+
+#define restrict __restrict
+#define inline __inline
+#define true 1
+#define false 0
+
 
 /* Get bool. */
-# include <stdbool.h>
+// # include <stdbool.h>
+#define bool int
+#define const 
 
 /* This uses that the expression (n+(k-1))/k means the smallest
    integer >= n/k, i.e., the ceiling of n/k.  */
