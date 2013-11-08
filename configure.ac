@@ -1,8 +1,9 @@
 dnl AM_CONFIG_HEADER(config.h)
 
-AC_INIT([GeoIP], [1.5.1],[support@maxmind.com],[GeoIP])
+AC_PREREQ([2.65])
+AC_INIT([GeoIP], [1.6.0],[support@maxmind.com],[GeoIP])
 AC_GNU_SOURCE
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE(1.11.0)
 AC_CONFIG_SRCDIR([libGeoIP/GeoIP.c])
 GEOIP_VERSION_INFO=`echo $VERSION | awk -F. '{ printf "%d:%d:%d", $1+$2, $3, $2 }'`
 AC_SUBST(GEOIP_VERSION_INFO)
@@ -20,11 +21,9 @@ AC_TYPE_OFF_T
 AC_TYPE_SIZE_T
 AC_TYPE_SSIZE_T
 AC_TYPE_UINT32_T
+AC_TYPE_UINT64_T
 
 AC_C_BIGENDIAN([AC_DEFINE(BIG_ENDIAN_HOST,1)],[AC_DEFINE(LITTLE_ENDIAN_HOST,1)])
-
-AC_CHECK_HEADERS(stdint.h)
-AC_CHECK_HEADERS(zlib.h, , AC_MSG_ERROR(Zlib header (zlib.h) not found. You may need to install a zlib development package.))
 
 AC_CHECK_FUNC(getopt, AC_DEFINE(HAVE_GETOPT))
 AC_CHECK_FUNC(gettimeofday, AC_DEFINE(HAVE_GETTIMEOFDAY))
@@ -45,10 +44,11 @@ AC_CHECK_FUNC(gethostbyname_r, [
 		AC_DEFINE(GETHOSTBYNAME_R_RETURNS_INT)])
 	])
 
-AC_CHECK_FUNCS([memset socket strchr strdup strstr ])
+AC_CHECK_FUNCS([ memset memchr munmap strrchr socket strchr strdup strstr ])
 
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
+AC_FUNC_MMAP
 
 AC_ARG_ENABLE([data-files],
     AS_HELP_STRING([--disable-data-files], [Install library without installing data files]))
@@ -62,8 +62,6 @@ GeoIP.spec
 geoip.pc
 libGeoIP/Makefile
 apps/Makefile
-conf/Makefile
-data/Makefile
 man/Makefile
 test/Makefile
 ])

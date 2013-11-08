@@ -5,9 +5,8 @@
 #include <sys/time.h>
 #endif                          /* !defined(_WIN32) */
 
-char *ipstring[4] = { "24.24.24.24", "80.24.24.80",
-    "200.24.24.40", "68.24.24.46"
-};
+char *ipstring[4] = { "24.24.24.24",  "80.24.24.80",
+                      "200.24.24.40", "68.24.24.46" };
 
 int numipstrings = 4;
 
@@ -81,7 +80,7 @@ void testgeoipcountry(int flags, const char *msg, int numlookups)
 void testgeoiporg(int flags, const char *msg, int numlookups)
 {
     GeoIP *i = NULL;
-    GeoIPRegion *i3 = NULL;
+    char *i3 = NULL;
     int i4 = 0;
     int i2 = 0;
     double t = 0;
@@ -157,27 +156,29 @@ int main()
                      100 * time);
     testgeoipcountry(GEOIP_MEMORY_CACHE,
                      "GeoIP Country with GEOIP_MEMORY_CACHE", 1000 * time);
-    testgeoipcountry(GEOIP_MEMORY_CACHE | GEOIP_CHECK_CACHE,
-                     "GeoIP Country with GEOIP_MEMORY_CACHE and GEOIP_CHECK_CACHE",
-                     1000 * time);
+    testgeoipcountry(
+        GEOIP_MEMORY_CACHE | GEOIP_CHECK_CACHE,
+        "GeoIP Country with GEOIP_MEMORY_CACHE and GEOIP_CHECK_CACHE",
+        1000 * time);
 
     testgeoipregion(0, "GeoIP Region", 100 * time);
     testgeoipregion(GEOIP_CHECK_CACHE, "GeoIP Region with GEOIP_CHECK_CACHE",
                     100 * time);
     testgeoipregion(GEOIP_MEMORY_CACHE, "GeoIP Region with GEOIP_MEMORY_CACHE",
                     1000 * time);
-    testgeoipregion(GEOIP_MEMORY_CACHE | GEOIP_CHECK_CACHE,
-                    "GeoIP Region with GEOIP_MEMORY_CACHE and GEOIP_CHECK_CACHE",
-                    1000 * time);
+    testgeoipregion(
+        GEOIP_MEMORY_CACHE | GEOIP_CHECK_CACHE,
+        "GeoIP Region with GEOIP_MEMORY_CACHE and GEOIP_CHECK_CACHE",
+        1000 * time);
 
     testgeoiporg(0, "GeoIP Org", 50 * time);
     testgeoiporg(GEOIP_INDEX_CACHE, "GeoIP Org with GEOIP_INDEX_CACHE",
-                  200 * time);
+                 200 * time);
     testgeoiporg(GEOIP_INDEX_CACHE | GEOIP_CHECK_CACHE,
-                  "GeoIP Org with GEOIP_INDEX_CACHE and GEOIP_CHECK_CACHE",
-                  200 * time);
+                 "GeoIP Org with GEOIP_INDEX_CACHE and GEOIP_CHECK_CACHE",
+                 200 * time);
     testgeoiporg(GEOIP_MEMORY_CACHE, "GeoIP Org with GEOIP_MEMORY_CACHE",
-                  500 * time);
+                 500 * time);
 
     testgeoipcity(0, "GeoIP City", 50 * time);
     testgeoipcity(GEOIP_INDEX_CACHE, "GeoIP City with GEOIP_INDEX_CACHE",

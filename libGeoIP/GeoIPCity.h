@@ -30,22 +30,22 @@ extern "C" {
 #define  GEOIP_UNKNOWN_CONF  ( 0x7f )
 
 typedef struct GeoIPRecordTag {
-	char *country_code;
-	char *country_code3;
-	char *country_name;
-	char *region;
-	char *city;
-	char *postal_code;
-	float latitude;
-	float longitude;
-	union {
-	  int metro_code; /* metro_code is a alias for dma_code */
-	  int dma_code;
-        };
-	int area_code;
-	int charset;
-	char *continent_code;
-        int netmask;	
+    char *country_code;
+    char *country_code3;
+    char *country_name;
+    char *region;
+    char *city;
+    char *postal_code;
+    float latitude;
+    float longitude;
+    union {
+        int metro_code;   /* metro_code is a alias for dma_code */
+        int dma_code;
+    };
+    int area_code;
+    int charset;
+    char *continent_code;
+    int netmask;
 } GeoIPRecord;
 
 GEOIP_API GeoIPRecord * GeoIP_record_by_ipnum (GeoIP* gi, unsigned long ipnum);
