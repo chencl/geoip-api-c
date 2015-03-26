@@ -35,19 +35,18 @@ extern "C" {
 #include <ws2tcpip.h>
 #define HAVE_STDINT_H 1
 #define snprintf _snprintf
+// #define ssize_t size_t
+#define PACKAGE_VERSION "1.6.0"
 #define FILETIME_TO_USEC(ft)                      \
 	(((unsigned __int64)ft.dwHighDateTime << 32 | \
 	ft.dwLowDateTime) / 10)
-#define ssize_t size_t
-#define PACKAGE_VERSION "1.5.1"
 #endif /* !defined(_WIN32) */ 
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-	//#include <sys/types.h> /* for fstat */
-	//#include <sys/stat.h>	/* for fstat */
+#include <sys/types.h> /* for fstat */
+#include <sys/stat.h>  /* for fstat */
 
 #define SEGMENT_RECORD_LENGTH 3
 #define LARGE_SEGMENT_RECORD_LENGTH 4

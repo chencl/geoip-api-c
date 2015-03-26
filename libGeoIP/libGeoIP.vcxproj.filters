@@ -30,6 +30,18 @@
     <ClCompile Include="GeoIP_deprecated.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="base64.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeoIPUpdate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="md5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeoIP.h">
@@ -39,6 +51,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GeoIP_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="base64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeoIPUpdate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="md5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
