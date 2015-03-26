@@ -106,6 +106,7 @@ extern "C" {
 		GEOIP_CHECK_CACHE = 2,
 		GEOIP_INDEX_CACHE = 4,
 		GEOIP_MMAP_CACHE = 8,
+    GEOIP_SILENCE = 16,
 	} GeoIPOptions;
 
 	typedef enum {
@@ -162,25 +163,38 @@ extern "C" {
 		GEOIP_CORPORATE_SPEED = 3,
 	} GeoIPNetspeedValues;
 
+#if defined(_WIN32) && !defined(__MINGW32__)
+#ifdef GEOIP_EXPORTS
+#define GEOIP_API __declspec(dllexport)
+#define GEOIP_DATA __declspec(dllexport)
+#else
+#define GEOIP_DATA __declspec(dllimport)
+#define GEOIP_API
+#endif  /* GEOIP_EXPORTS */
+#else
+#define GEOIP_API
+#define GEOIP_DATA
+#endif
+
 	extern char **GeoIPDBFileName;
-	extern const char * GeoIPDBDescription[NUM_DB_TYPES];
-	extern const char *GeoIPCountryDBFileName;
-	extern const char *GeoIPRegionDBFileName;
-	extern const char *GeoIPCityDBFileName;
-	extern const char *GeoIPOrgDBFileName;
-	extern const char *GeoIPISPDBFileName;
-	extern const char *GeoIPLocationADBFileName;
-	extern const char *GeoIPAccuracyRadiusFileName;
-	extern const char *GeoIPCityConfidenceFileName;
+extern GEOIP_DATA const char * GeoIPDBDescription[NUM_DB_TYPES];
+extern GEOIP_DATA const char *GeoIPCountryDBFileName;
+extern GEOIP_DATA const char *GeoIPRegionDBFileName;
+extern GEOIP_DATA const char *GeoIPCityDBFileName;
+extern GEOIP_DATA const char *GeoIPOrgDBFileName;
+extern GEOIP_DATA const char *GeoIPISPDBFileName;
+extern GEOIP_DATA const char *GeoIPLocationADBFileName;
+extern GEOIP_DATA const char *GeoIPAccuracyRadiusFileName;
+extern GEOIP_DATA const char *GeoIPCityConfidenceFileName;
 	extern char * GeoIP_custom_directory;
 
 	/* Warning: do not use those arrays as doing so may break your
 	 * program with newer GeoIP versions */
-	extern const char GeoIP_country_code[256][3];
-	extern const char GeoIP_country_code3[256][4];
-	extern const char * GeoIP_country_name[256];
-	extern const char * GeoIP_utf8_country_name[256];
-	extern const char GeoIP_country_continent[256][3];
+extern GEOIP_DATA const char GeoIP_country_code[256][3];
+extern GEOIP_DATA const char GeoIP_country_code3[256][4];
+extern GEOIP_DATA const char * GeoIP_country_name[256];
+extern GEOIP_DATA const char * GeoIP_utf8_country_name[256];
+extern GEOIP_DATA const char GeoIP_country_continent[256][3];
 
 #ifdef DLL
 #define GEOIP_API __declspec(dllexport)
@@ -192,6 +206,14 @@ extern "C" {
 	GEOIP_API GeoIP * GeoIP_open_type(int type, int flags);
 	GEOIP_API GeoIP * GeoIP_new(int flags);
 	GEOIP_API GeoIP * GeoIP_open(const char * filename, int flags);
+/*
+ * WARNING: GeoIP_db_avail() checks for the existence of a database
+ * file but does not check that it has the requested database revision.
+ * For database types which have more than one revision (including Region,
+ * City, and Cityv6), this can lead to unexpected results. Check the
+ * return value of GeoIP_open_type() to find out whether a particular
+ * database type is really available.
+ */
 	GEOIP_API int GeoIP_db_avail(int type);
 	GEOIP_API void GeoIP_delete(GeoIP * gi);
 
